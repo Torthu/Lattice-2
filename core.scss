@@ -1,0 +1,95 @@
+/* #Clearing
+================================================== */
+/* Self Clearing Goodness */
+.container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
+
+/* Use clearfix class on parent to clear nested columns,
+or wrap each row of columns in a <div class="row"> */
+.clearfix:before,
+.clearfix:after,
+.row:before,
+.row:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0; }
+
+.row:after,
+.clearfix:after {
+  clear: both; }
+
+.row,
+.clearfix {
+  zoom: 1; }
+
+/* You can also use a <br class="clear" /> to clear columns */
+.clear {
+  clear:both;
+}
+.clear-left {
+  clear: left;
+}
+.clear-right {
+  clear: right;
+}
+
+/* #Misc
+================================================== */
+
+.left { float:left; }
+.center { margin: 0 auto !important; float: none !important; }
+.right { float: right !important; }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align:right; }
+
+.no-padding { padding: 0 !important; }
+.no-top-padding { padding-top: 0 !important; }
+.no-right-padding { padding-right: 0 !important; }
+.no-bottom-padding { padding-bottom: 0 !important; }
+.no-left-padding { padding-left: 0 !important; }
+
+.standard-padding { padding: $standard-padding; }
+.standard-top-padding { padding-top: $standard-padding; }
+.standard-right-padding { padding-right: $standard-padding; }
+.standard-bottom-padding { padding-bottom: $standard-padding; }
+.standard-left-padding { padding-left: $standard-padding; }
+
+.no-margin { margin:0 !important; }
+.no-top-margin { margin-top: 0 !important; }
+.no-right-margin { margin-right: 0 !important; }
+.no-bottom-margin { margin-bottom: 0 !important; }
+.no-left-margin { margin-left: 0 !important; }
+
+.standard-margin { margin: $standard-margin; }
+.standard-top-margin { margin-top: $standard-margin; }
+.standard-right-margin { margin-right: $standard-margin; }
+.standard-bottom-margin { margin-bottom: $standard-margin; }
+.standard-left-margin { margin-left: $standard-margin; }
+
+.hidden { display: none; }
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block !important; float: none !important; }
+
+.uppercase {
+  text-transform: uppercase;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.capitalise {
+  text-transform: capitalize;
+}
+
+img.scale-with-grid, img.responsive {
+  @include responsive-image();
+}

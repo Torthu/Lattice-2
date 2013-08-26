@@ -1,0 +1,64 @@
+
+// use col(2,3) to get two thirds
+@function col($num, $fraction) {
+	@return (($grid-size/$fraction)*$num);
+}
+@function offset($direction, $num, $fraction:0) {
+	$return: 0;
+	@if($direction == left or $direction == right) {
+		$return: (($grid-size/$fraction)*$num);
+	}
+	@else {
+		$return: $offset-top-bottom*$num;
+	}
+
+	@return $return;
+}
+
+// use @include col(2,3) to get two thirds
+@mixin col($num, $fraction, $padding:$default-grid-padding) {
+  width: col($num, $fraction);
+  padding: $padding;
+  float: left;
+  @include vendor-prefix(box-sizing, border-box);
+}
+
+@mixin offset($direction, $num, $fraction:0) {
+	margin-#{$direction}: offset($direction, $num, $fraction);
+}
+
+// generate css classes (e.g if you want users of a CMS to be able to edit width of elements without accessing the scss)
+@if($generate-grid-classes==true) {
+	.no-padding {
+		padding: 0 !important;
+	}
+	.no-margins {
+		padding: 0 !important;
+	}
+	@for $j from 1 to length($fractions)+1 {
+		@for $i from 1 to nth($fractions,$j) {
+			.col-#{$i}-#{nth($fractions,$j)} { 
+				@include col($i, nth($fractions, $j));
+			}
+			@if($generate-grid-offset-classes==true) {
+				.offset-#{$i}-#{nth($fractions, $j)} { 
+					@include offset(left, $i, nth($fractions, $j));
+				}
+				.offset-right-#{$i}-#{nth($fractions,$j)} { 
+					@include offset(right, $i, nth($fractions, $j));
+				}
+			}
+		}
+	}
+}
+
+@if($generate-grid-classes==true and $generate-grid-offset-classes==true) {
+	@for $i from 1 to 5 {
+		.offset-top-#{$i} {
+			@include offset(top, $i);
+		}
+		.offset-bottom-#{$i} {
+			@include offset(bottom, $i);
+		}
+	}
+}
