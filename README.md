@@ -20,14 +20,14 @@ which will generate the following CSS:
 
 ```css
 .something {
-  width: 33.3%;
-  padding: 50px;
-  float: left;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  box-sizing: border-box;
+	width: 33.3%;
+	padding: 50px;
+	float: left;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
 }
 ```
 
@@ -41,14 +41,14 @@ with the corresponding CSS:
 
 ``` CSS
 .col-1-3 {
-  width: 33.3%;
-  padding: 50px;
-  float: left;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  box-sizing: border-box;
+	width: 33.3%;
+	padding: 50px;
+	float: left;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 In both cases padding will be used for gutters.

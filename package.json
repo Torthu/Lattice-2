@@ -1,20 +1,30 @@
 {
-  "name": "Lattice-2",
-  "version": "0.1.0",
-  "description": "Lattice 2 is a tiny grid and typography framework written in SCSS.",
-  "main": "lattice.scss",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Torthu/Lattice-2.git"
-  },
-  "keywords": [
-    "lattice",
-    "scss",
-    "sass",
-    "grid",
-    "framework"
-  ],
-  "author": "Torstein Thune",
-  "license": "MIT",
-  "readmeFilename": "README.md",
+	"name": "Lattice-2",
+	"version": "0.1.0",
+	"description": "Lattice 2 is a tiny grid and typography framework written in SCSS.",
+	"main": "lattice.scss",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Torthu/Lattice-2.git"
+	},
+	"peerDependencies": {
+		"compass": "*"
+	},
+	"devDependencies": {
+		"grunt": "*",
+		"load-grunt-tasks": "~0.1.0",
+		"time-grunt": "~0.1.1",
+		"grunt-contrib-watch": "~0.5.2",
+		"grunt-contrib-compass": "*"
+	},
+	"keywords": [
+		"lattice",
+		"scss",
+		"sass",
+		"grid",
+		"framework"
+	],
+	"author": "Torstein Thune",
+	"license": "MIT",
+	"readmeFilename": "README.md"
 }
