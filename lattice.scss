@@ -6,7 +6,7 @@
 * 26. aug. 2013
 */
 
-@import "reset.scss";
+@import "reset.scss"; // CSS reset
 @import "core-mixins.scss";
 
 // GENERAL SETTINGS
@@ -21,7 +21,7 @@ $generate-grid-classes: false; // true will generate classes for the grid, false
 $generate-grid-offset-classes: true; // true will generate offset classes in the form of margins
 $default-grid-padding: $standard-padding;
 $offset-top-bottom: $standard-margin;
-$fractions: 2,3,4,5,6,7,8,9,10;
+$fractions: 2,3,4,5,6,7,8,9,10; // used to generate classes
 
 @import "grid.scss";
 
@@ -33,6 +33,7 @@ $h2: 1.5 * $scaling;
 $h3: 1.3 * $scaling;
 $h4: 1.1 * $scaling;
 $p: 1 * $scaling;
+$generate-typography-classes: false;
 
 @import "typography.scss";
 
