@@ -5,35 +5,50 @@ Lattice 2 is a small and lightweight SCSS/CSS framework.
 
 You can use Lattice either as a pure SCSS mixin framework, or you can tell it to generate classes to be used directly in the HTML.
 
+## The Grid
+The grid in Lattice 2 uses fractions to determine width. These fractions are available both as mixins and as classes.
 
-## Usage
-Lattice 2 uses percentages to determine column widths. It uses fractions and integers to determine width: .col-1-3 equals "one third" and .col-2-5 equals "two fifths". In the same manner @include col(1,2); indicates that you want the element to be a "one half width" column. It uses padding to create spacing between content.
+For instance if you want a 33.3% wide column you could use either:
 
-### Usage within SCSS
-```scss
-.something {
-	@include col(1,2);
+``` SCSS
+.classname {
+	@include col(1,3);
 }
 ```
 
-will generate
+which will generate the following CSS:
 
 ```css
 .something {
-  width: 50%;
+  width: 33.3%;
   padding: 50px;
   float: left;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 ```
 
-### Usage as classes
-The following code creates a column that is 33.3333% wide.
+or
 
-```html
+``` HTML
 <div class="col-1-3"></div>
 ```
+
+with the corresponding CSS:
+
+``` CSS
+.col-1-3 {
+  width: 33.3%;
+  padding: 50px;
+  float: left;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+In both cases padding will be used for gutters.
