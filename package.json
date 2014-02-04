@@ -1,12 +1,17 @@
 {
-	"name": "Lattice-2",
-	"version": "0.1.0",
-	"description": "Lattice 2 is a tiny grid and typography framework written in SCSS.",
+	"name": "Lattice",
+	"version": "2.0.0",
+	"description": "Lattice 2 is a tiny grid framework written in SCSS.",
 	"main": "lattice.scss",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Torthu/Lattice-2.git"
 	},
+	"files": [
+		"scss/lattice.scss",
+		"scss/grid.scss",
+		"scss/breakpoint.scss"
+	],
 	"peerDependencies": {
 		"compass": "*"
 	},

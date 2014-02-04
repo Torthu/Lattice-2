@@ -1,64 +1,115 @@
+// ------------------ 
+//
+//  HELPER FUNCTIONS 
+//
+// ------------------
 
-// use col(2,3) to get two thirds
-@function col($num, $fraction) {
-	@return (($grid-size/$fraction)*$num);
+// strip unit from a number
+@function strip-units($number) {
+	@return $number / ($number * 0 + 1);
 }
-@function offset($direction, $num, $fraction:0) {
-	$return: 0;
-	@if($direction == left or $direction == right) {
-		$return: (($grid-size/$fraction)*$num);
+
+// find type of amount, e.g columns, fraction, or a unit such as %, em or rem
+@function find-type($n) {
+	@if(unitless($n)) {
+		@if(round($n) == $n) { 
+			@return columns; 
+		}
+		@else { 
+			@return fraction; 
+		}
 	}
 	@else {
-		$return: $offset-top-bottom*$num;
-	}
-
-	@return $return;
-}
-
-// use @include col(2,3) to get two thirds
-@mixin col($num, $fraction, $padding:$default-grid-padding) {
-  width: col($num, $fraction);
-  padding: $padding;
-  float: left;
-  @include vendor-prefix(box-sizing, border-box);
-}
-
-@mixin offset($direction, $num, $fraction:0) {
-	margin-#{$direction}: offset($direction, $num, $fraction);
-}
-
-// generate css classes (e.g if you want users of a CMS to be able to edit width of elements without accessing the scss)
-@if($generate-grid-classes==true) {
-	.no-padding {
-		padding: 0 !important;
-	}
-	.no-margins {
-		padding: 0 !important;
-	}
-	@for $j from 1 to length($fractions)+1 {
-		@for $i from 1 to nth($fractions,$j) {
-			.col-#{$i}-#{nth($fractions,$j)} { 
-				@include col($i, nth($fractions, $j));
-			}
-			@if($generate-grid-offset-classes==true) {
-				.offset-#{$i}-#{nth($fractions, $j)} { 
-					@include offset(left, $i, nth($fractions, $j));
-				}
-				.offset-right-#{$i}-#{nth($fractions,$j)} { 
-					@include offset(right, $i, nth($fractions, $j));
-				}
-			}
-		}
+		@return units($n);
 	}
 }
 
-@if($generate-grid-classes==true and $generate-grid-offset-classes==true) {
-	@for $i from 1 to 5 {
-		.offset-top-#{$i} {
-			@include offset(top, $i);
-		}
-		.offset-bottom-#{$i} {
-			@include offset(bottom, $i);
-		}
+@function calc-em($amount) {}
+@function calc-rem($amount) {}
+@function calc-px($amount) {}
+
+// turn percentage into fraction, and use that
+@function calc-percentage($amount) { 
+	@return $grid-width * strip-units($amount)/strip-units($grid-width); 
+}
+
+@function calc-fraction($fraction) { 
+	@return $grid-width * $fraction; 
+}
+
+@function calc-column($columns) { 
+	@return $columns/$number-of-columns * $grid-width; 
+}
+
+@function calc($amount, $type) {
+	@if($type == null) {
+		$calced-amount: find-type($amount);
 	}
+
+	@if($type == fraction) {
+		$calced-amount: calc-fraction($amount);
+	}
+	@else if($type == cols || $type == columns || $type == col || $type == column) {
+		$calced-amount: calc-column($amount);
+	}
+	@else if($type == percentage) {
+		$calced-amount: calc-percentage($amount);
+	}
+
+	@return $calced-amount;
+}
+
+
+// ------------------ 
+//
+//  MIXINS 
+//
+// ------------------
+
+@mixin col($amount, $gutter:$default-grid-gutter, $type:null) {
+	box-sizing: border-box; // find nice way of doing this
+	float: left; // implement negative margins grid aswell?
+	padding: $gutter;
+	width: calc($amount);
+}
+
+// push the column right
+@mixin push($amount, $type:null) {
+	margin-left: calc($amount, $type);
+}
+
+// pull the column left
+@mixin pull($amount, $type:null) {
+	margin-left: unary_minus(calc($amount, $type));
+}
+
+// margin in given direction
+@mixin offset($direction, $amount, $type:null) {
+
+	@if($direction == left or $direction == right) {
+		$margin: margin-#{$direction}: calc($amount, $type);
+	}
+	@else {
+		// we don't follow the grid vertically, look at vertical harmony?
+		$margin: $amount;
+	}
+
+	margin-#{$direction}: $margin;
+}
+
+// Make images respond to size of container
+@mixin responsive-image() {
+	width: 100%;
+    height: auto;
+    display: block;
+}
+
+@mixin vendor-prefix($name, $argument, $remove-prefix:false) {
+	@if($remove-prefix == false) {
+		-webkit-#{$name}: $argument;
+		-ms-#{$name}: $argument;
+		-moz-#{$name}: $argument;
+		-o-#{$name}: $argument;
+	}
+	#{$name}: $argument;
 }

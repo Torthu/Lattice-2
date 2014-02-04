@@ -1,54 +1,24 @@
-Lattice 2
-=========
+# Lattice SCSS Grid
 
-Lattice 2 is a small and lightweight SCSS/CSS framework.
+Lattice 2 is a small and lightweight SCSS/CSS framework. The grid uses the float:left method of placing elements.
 
-You can use Lattice either as a pure SCSS mixin framework, or you can tell it to generate classes to be used directly in the HTML.
+Lattice 2 uses either percentages, columns or fractions in order to determine element placements and sizes.
 
 ## The Grid
-The grid in Lattice 2 uses fractions to determine width. These fractions are available both as mixins and as classes.
+$amount and $gutter can be a percentage, a fraction or a column number.
 
-For instance if you want a 33.3% wide column you could use either:
+### Mixins
+col($amount, $gutter)
+push($amount)
+pull($amount)
+offset($direction, $amount)
+responsive-image()
+vendor-prefix($name, $argument)
 
-``` SCSS
-.classname {
-	@include col(1,3);
-}
-```
+## Breakpoints (to make the grid responsive)
 
-which will generate the following CSS:
+### Mixins
+breakpoint($res (a resolution or a predetermined one), $type (min/max), $axis (width/height))
 
-```css
-.something {
-	width: 33.3%;
-	padding: 50px;
-	float: left;
-	-webkit-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	box-sizing: border-box;
-}
-```
-
-or
-
-``` HTML
-<div class="col-1-3"></div>
-```
-
-with the corresponding CSS:
-
-``` CSS
-.col-1-3 {
-	width: 33.3%;
-	padding: 50px;
-	float: left;
-	-webkit-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-In both cases padding will be used for gutters.
+### Variables
+A number of default resolutions, such as HD, SD, etcetera are included as variables.

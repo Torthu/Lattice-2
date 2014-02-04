@@ -1,0 +1,46 @@
+// generic
+$desktop: $WXGA;
+$laptop: $DVGA; 
+$tablet: $HVGA;
+$mobile: 0;
+
+// standards
+$WQXGA: {:width => 2560px, :height => 1600px};
+$WQHD: {:width => 2560px, :height => 1440px};
+$QXGA: {:width => 2048px, :height => 1536px};
+$WUXGA: {:width => 1920px, :height => 1200px};
+$HDfull: {:width => 1920px, :height => 1080px};
+$HD: $HDfull;
+$fullHD: $HDfull;
+$WSXGAplus: {:width => 1680px, :height => 1050px};
+$UXGA: {:width => 1600px, :height => 1200px};
+$HDplus: {:width => 1600px, :height => 900px};
+$WXGAplus: {:width => 1440px, :height => 900px};
+$SXGA: {:width => 1280px, :height => 1024px};
+$WXGA: {:width => 1280px, :height => 768px};
+$HDready: {:width => 1280px, :height => 720px};
+$XGA: {:width => 1024px, :height => 768px};
+$WSVGA: {:width => 1024px, :height => 600px};
+$DVGA: {:width => 960px, :height => 640px};
+$qHD: {:width => 960px, :height => 540px};
+$FWVGA: {:width => 854px, :height => 480px};
+$WVGA: {:width => 800px, :height => 480px};
+$VGA: {:width => 640px, :height => 480px};
+$nHD: {:width => 640px, :height => 360px};
+$HVGA: {:width => 480px, :height => 320px};
+$WQVGA: {:width => 400px, :height => 240px};
+$QVGA: {:width => 320px, :height => 240px};
+
+
+// fine grained
+$tablet-landscape: {:min => "1366", :max => "1920"};
+$tablet-portrait: {:min => "1366", :max => "1920"};
+$mobile-landscape: {:min => "1366", :max => "1920"};
+$mobile-portrait: {:min => "1366", :max => "1920"};
+
+
+@mixin breakpoint($res, $type:min, $axis:width) {
+  @media (#{$type}-#{$axis}: $res) {
+  	@content;
+  }
+}
