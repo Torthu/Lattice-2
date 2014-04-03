@@ -49,7 +49,7 @@
 	@if($type == fraction) {
 		$calced-amount: calc-fraction($amount);
 	}
-	@else if($type == cols || $type == columns || $type == col || $type == column) {
+	@else if($type == cols or $type == columns or $type == col or $type == column) {
 		$calced-amount: calc-column($amount);
 	}
 	@else if($type == percentage) {
@@ -87,7 +87,7 @@
 @mixin offset($direction, $amount, $type:null) {
 
 	@if($direction == left or $direction == right) {
-		$margin: margin-#{$direction}: calc($amount, $type);
+		$margin: calc($amount, $type);
 	}
 	@else {
 		// we don't follow the grid vertically, look at vertical harmony?
