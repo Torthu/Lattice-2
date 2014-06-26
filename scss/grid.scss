@@ -30,7 +30,7 @@
 
 // turn percentage into fraction, and use that
 @function calc-percentage($amount) { 
-	@return $grid-width * strip-units($amount)/strip-units($grid-width); 
+	@return $grid-width * 100%/$amount; 
 }
 
 @function calc-fraction($fraction) { 
@@ -41,15 +41,18 @@
 	@return $columns/$number-of-columns * $grid-width; 
 }
 
-@function calc($amount, $type) {
+@function lcalc($amount, $type) {
+
+	$calced-amount: null;
+
 	@if($type == null) {
-		$calced-amount: find-type($amount);
+		$type: find-type($amount);
 	}
 
 	@if($type == fraction) {
 		$calced-amount: calc-fraction($amount);
 	}
-	@else if($type == cols || $type == columns || $type == col || $type == column) {
+	@else if($type == cols or $type == columns or $type == col or $type == column) {
 		$calced-amount: calc-column($amount);
 	}
 	@else if($type == percentage) {
@@ -66,28 +69,30 @@
 //
 // ------------------
 
-@mixin col($amount, $gutter:$default-grid-gutter, $type:null) {
+@mixin col($amount, $gutter:$default-grid-gutter, $float:true, $type:null) {
 	box-sizing: border-box; // find nice way of doing this
-	float: left; // implement negative margins grid aswell?
+	@if($float) {
+		float: left; // implement negative margins grid aswell?
+	}
 	padding: $gutter;
-	width: calc($amount);
+	width: lcalc($amount, $type);
 }
 
 // push the column right
 @mixin push($amount, $type:null) {
-	margin-left: calc($amount, $type);
+	margin-left: lcalc($amount, $type);
 }
 
 // pull the column left
 @mixin pull($amount, $type:null) {
-	margin-left: unary_minus(calc($amount, $type));
+	margin-left: unary_minus(lcalc($amount, $type));
 }
 
 // margin in given direction
 @mixin offset($direction, $amount, $type:null) {
 
 	@if($direction == left or $direction == right) {
-		$margin: margin-#{$direction}: calc($amount, $type);
+		$margin: lcalc($amount, $type);
 	}
 	@else {
 		// we don't follow the grid vertically, look at vertical harmony?
