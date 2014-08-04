@@ -90,13 +90,9 @@
 
 // margin in given direction
 @mixin offset($direction, $amount, $type:null) {
-
+	$margin: 0;
 	@if($direction == left or $direction == right) {
-<<<<<<< HEAD
 		$margin: lcalc($amount, $type);
-=======
-		$margin: calc($amount, $type);
->>>>>>> 3e12c0ecde5af71b65860fc8f3b228fec4b1e758
 	}
 	@else {
 		// we don't follow the grid vertically, look at vertical harmony?
